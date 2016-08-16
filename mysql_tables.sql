@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `firebase_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(200) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `agent` varchar(200),
   PRIMARY KEY (`id`),
   UNIQUE KEY `token` (`token`)
 );
