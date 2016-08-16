@@ -7,7 +7,7 @@ sends notification to android/ios app via Firebase API after new post has been s
 TODO List
 =======
 
-- Protect Against Malicious POST Requests
+- Protect Against Malicious POST Requests(Probably fixed)
 - Admin Page
 - Auto Mysql Table Creator
 
