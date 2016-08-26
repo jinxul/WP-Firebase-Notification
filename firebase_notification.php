@@ -2,14 +2,15 @@
 /*
 Plugin Name: Firebase Notification
 Description: sends notification to android app via Firebase API after new post has been submited.
-Version:     1.0
+Version:     1.1
 Author:      Ahmad Givekesh
 Author URI:  baboon.ir
 License:     Apache v2.0
 License URI: http://www.apache.org/licenses/LICENSE-2.0
 */
 
-include 'tokenHandler.php';
+include 'utils.php';
+include 'admin/index.php';
 
 add_action( 'save_post', 'prepare_notification', 13, 2);
 function prepare_notification( $post_id, $post) {
@@ -25,7 +26,7 @@ function prepare_notification( $post_id, $post) {
 		$post_title = $post->post_title;
 		$message = array('body' => $post_title,
 			'title' => 'پست جدید');
-		send_notification($tokens, $message);
+		send_notification($tokens, $message, 'notification');
 		add_to_db($wpdb, $post_id, $post_title);
 	} 
 }
@@ -41,7 +42,6 @@ function get_token($wpdb){
 	foreach($result as $row){
 		$tokens[] = $row->token;
 	}
-	
 	return $tokens;
 }
 
@@ -49,11 +49,11 @@ function add_to_db($wpdb, $id, $title){
 	$wpdb->query( $wpdb->prepare("INSERT INTO notification_list(id, title) VALUES(%d, %s);", $id, $title));
 }
 
-function send_notification ($tokens, $message){
+function send_notification ($tokens, $message, $type){
 		$url = 'https://fcm.googleapis.com/fcm/send';
 		$fields = array(
 			 'registration_ids' => $tokens,
-			 'notification' => $message
+			 $type => $message
 			);
 		$headers = array(
 			'Authorization:key = AUTHORIZATION_KEY ',
@@ -73,6 +73,6 @@ function send_notification ($tokens, $message){
            die('Curl failed: ' . curl_error($ch));
        }
        curl_close($ch);
-     
+
        return $result;
 }

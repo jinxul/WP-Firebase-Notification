@@ -8,7 +8,6 @@ TODO List
 =======
 
 - Protect Against Malicious POST Requests(Probably fixed)
-- Admin Page
 - Auto Mysql Table Creator
 
 
