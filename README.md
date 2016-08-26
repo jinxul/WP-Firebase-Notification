@@ -8,14 +8,12 @@ TODO List
 =======
 
 - Protect Against Malicious POST Requests(Probably fixed)
-- Auto Mysql Table Creator
 
 
 REQUIREMENTS
 =======
 
 - you need to put your Authorization key in send_notification method (instead of AUTHORIZATION_KEY).
-- also dont forget to import/create mysql tables (provided in mysql_tables.sql).
 
 Credits
 =======
